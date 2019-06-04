@@ -1,0 +1,100 @@
+{% extends 'club_admin/admin_base.html' %}
+{% load static %}
+
+{% block content_right %}
+
+    <div class="page-content">
+
+        <!-- Page Body -->
+        <div class="page-body">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'club_admin:index' %}">首页</a>
+                    </li>
+                    <li class="active">操作</li>
+                    <li class="active">编辑社团</li>
+                </ul>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="widget">
+                        <div class="widget-body">
+                            <div class="flip-scroll">
+                                <table class="table table-bordered table-hover" style="color: red">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="5">社团列表</th>
+                                    </tr>
+                                    </thead>
+                                    <thead class="">
+                                    <tr>
+                                        <th class="text-center" width="10%">序号</th>
+                                        <th class="text-center">社团名称</th>
+                                        <th class="text-center">社员总人数</th>
+                                        <th class="text-center">管理员人数</th>
+                                        <th class="text-center" width="30%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for club in clubs %}
+                                        <tr>
+                                            <td align="center">{{ forloop.counter }}</td>
+                                            <td align="center">{{ club.name }}</td>
+                                            <td align="center">{{ club.member_club.all | length }}</td>
+                                            <td align="center">{{ club.member_admin.all | length }}</td>
+                                            <td align="center">
+                                                <a href="{% url 'club_admin:edit_club_page' club_id=club.id %}"
+                                                   class="btn btn-primary btn-sm shiny">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                {#                                                <a href="{% url 'club_admin:add_club_member' %}"#}
+                                                {#                                                   class=" btn btn-primary btn-sm shiny">#}
+                                                {#                                                    <i class="fa fa-plus"></i> 添加#}
+                                                {#                                                </a>#}
+                                                <form style="display: inline-block"
+                                                      action="{% url 'club_admin:add_club_member' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="club_id" value="{{ club.id }}">
+                                                    <button type="submit" class=" btn btn-primary btn-sm shiny">
+                                                        <i class="fa fa-plus"></i> 添加
+                                                    </button>
+                                                </form>
+                                                <a href="#"
+                                                   class="btn btn-primary btn-sm shiny">
+                                                    <i class="fa fa-eye"></i> 查看
+                                                </a>
+                                                <a href="#"
+                                                   onclick="warning('确定要退出社团 - {{ club.name }} ?', '{% url 'club_admin:delete_club' club_id=club.id %}')"
+                                                   class="btn btn-danger btn-sm shiny">
+                                                    <i class="fa fa-trash-o"></i> 删除
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Page Body -->
+    </div>
+
+{% endblock %}
+

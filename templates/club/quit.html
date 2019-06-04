@@ -1,0 +1,76 @@
+{% extends 'club/club_base.html' %}
+{% load static %}
+
+{% block content_right %}
+
+    <div class="page-content">
+
+
+        <!-- Page Body -->
+        <div class="page-body">
+
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'club:index' %}">首页</a>
+                    </li>
+                    <li class="active">编辑我的信息</li>
+                    <li class="active">退出社团</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="widget">
+                        <div class="widget-body">
+                            <div class="flip-scroll">
+                                <table class="table table-bordered table-hover" style="color: red">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="4">退出社团</th>
+                                    </tr>
+                                    </thead>
+                                    <thead class="">
+                                    <tr>
+                                        <th class="text-center">序号</th>
+                                        <th class="text-center">社团名称</th>
+                                        <th class="text-center">职位</th>
+                                        <th class="text-center" width="30%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for club in user.club.all %}
+                                        <tr>
+                                            <td align="center">{{ forloop.counter }}</td>
+                                            <td align="center">{{ club.name }}</td>
+                                            <td align="center">{% if club in user.admin.all %}管理员{% else %}
+                                                社员 {% endif %}</td>
+                                            <td align="center">
+                                                <a href="#"
+                                               onClick="warning('确定要退出社团 - {{ club.name }} ?', '{% url 'club:exe_quit' club_id=club.id %}')"
+                                               class="btn btn-danger btn-sm shiny">
+                                                <i class="fa fa-trash-o"></i> 退出
+                                            </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Page Body -->
+    </div>
+
+{% endblock %}
+

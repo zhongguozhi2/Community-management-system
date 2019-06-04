@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-container">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="http://www.zknu.edu.cn/" target="_blank" class="navbar-brand">
+                        <small>
+                            <img src={% static 'images/logo.png' %} alt="">
+                        </small>
+                    </a>
+                </div>
+                <!-- /Navbar Barnd -->
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+                <!-- Account Area and Settings -->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                        <ul class="account-area">
+                            <li>
+                                <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                    <div class="avatar" title="View your public profile">
+                                        <img src="{% static 'images/admin.jpg' %}">
+                                    </div>
+                                    <section>
+                                        <h2><span class="profile"><span>管理员-{{ admin.username }}</span></span></h2>
+                                    </section>
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                    {#                                    <li class="username"><a>David Stevenson</a></li>#}
+                                    <li class="dropdown-footer" style="text-align: center">
+                                        <a href="{% url 'club_admin:logout' %}">
+                                            退出登录
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-footer" style="text-align: center">
+                                        <a href="{% url 'club_admin:edit' %}">
+                                            修改密码
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content_left %}
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <div class="page-sidebar" id="sidebar">
+
+                <ul class="nav sidebar-menu">
+                    <!--Dashboard-->
+
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa "></i>
+                            <span class="menu-text">所有社团&nbsp;&nbsp;<i
+                                    style="color: red"></i></span>
+                            <i class="menu-expand"></i>
+                        </a>
+
+                        {% for club in clubs %}
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#">
+                                    <span class="menu-text">
+                                        {{ club.name }}                                    </span>
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+
+                    </li>
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa "></i>
+                            <span class="menu-text">所有社团&nbsp;&nbsp;<i
+                                    style="color: red"></i></span>
+                            <i class="menu-expand"></i>
+                        </a>
+
+                        {% for club in clubs %}
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#">
+                                    <span class="menu-text">
+                                        {{ club.name }}                                    </span>
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+
+                    </li>
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa "></i>
+                            <span class="menu-text">操作&nbsp;&nbsp;<i
+                                    style="color: red"></i></span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="{% url 'club_admin:add_club' %}">
+                                    <span class="menu-text">
+                                        新建社团                                   </span>
+                                    <i class="menu-expand"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'club_admin:edit_club' %}">
+                                    <span class="menu-text">
+                                        编辑社团                                   </span>
+                                    <i class="menu-expand"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'club_admin:edit' %}">
+                                    <span class="menu-text">
+                                         修改密码                                </span>
+                                    <i class="menu-expand"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- /Sidebar Menu -->
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

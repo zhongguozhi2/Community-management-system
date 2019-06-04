@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>周口师范学院学生社团管理系统</title>
+
+    <link rel="stylesheet" href="{% static 'style/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'style/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'style/weather-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'style/beyond.css' %}">
+    <link rel="stylesheet" href="{% static 'style/demo.css' %}">
+    <link rel="stylesheet" href="{% static 'style/typicons.css' %}">
+    <link rel="stylesheet" href="{% static 'style/animate.css' %}">
+
+
+
+    {% block ext_css %}
+
+    {% endblock %}
+
+</head>
+<body>
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+    {% block content_left %}
+
+    {% endblock %}
+
+    {% block content_right %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+<script type="text/javascript" src="{% static 'style/jquery_002.js' %}"></script>
+<script type="text/javascript" src="{% static 'style/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'style/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'style/beyond.js' %}"></script>
+
+{% block ext_js %}
+
+{% endblock %}
+</body>
+</html>

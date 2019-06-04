@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="login-container animated fadeInDown">
+        <form action="{% url 'club:register' %}" method="post">
+            {% csrf_token %}
+            <div class="loginbox bg-white">
+                <div class="loginbox-title">周师社团管理系统</div>
+                <div class="loginbox-title">社员注册</div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="请输入学号" name="sid" type="text">
+                </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="请输入密码" name="password" type="password">
+                </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="再次输入密码" name="re_password" type="password">
+                </div>
+                <div class="loginbox-submit">
+                    <input class="btn btn-primary btn-block" value="注册" type="submit">
+                </div>
+            </div>
+            <div class="logobox">
+                {% if register_error %}
+                    <div class="form-group">
+
+                        <p class="text-center" style="color: red">{{ register_error_message }}</p>
+                    </div>
+                {% else %}
+                    {% if register_success %}
+                        <p class="text-center" style="color: red">注册成功，点击 <a href="{% url 'club:login' %}">返回登录</a></p>
+                    {% else %}
+                        <p class="text-center" style="color: red;">详细信息请在登录系统后填写</p>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+        </form>
+    </div>
+{% endblock %}

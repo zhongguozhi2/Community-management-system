@@ -1,0 +1,110 @@
+{% extends 'club_admin/admin_base.html' %}
+{% load static %}
+{% block content_right %}
+    <div class="page-content">
+        <div class="page-body">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'club_admin:index' %}">首页</a>
+                    </li>
+                    <li class="active">操作</li>
+                    <li class="active">修改密码</li>
+
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="widget">
+                        <div class="widget-header bordered-bottom bordered-blue">
+                            {#                            <span class="widget-caption">新增规则</span>#}
+                        </div>
+                        <div class="widget-body">
+                            <div id="horizontal-form">
+                                <form class="form-horizontal" role="form" action="{% url 'club_admin:edit' %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="pid"
+                                               class="col-sm-2 control-label no-padding-right">用户名</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" readonly="readonly"
+                                                   value="{{ admin.username }}" id="" placeholder="" name="username"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pid" class="col-sm-2 control-label no-padding-right">密码</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control"
+                                                   value="" id="name" placeholder="不填写则视为不修改密码" name="password"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pid" class="col-sm-2 control-label no-padding-right">再次输入密码</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control"
+                                                   value="" id="name" placeholder="不填写则视为不修改密码" name="re_password"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="pid" class="col-sm-2 control-label no-padding-right"></label>
+
+                                        <p class="help-block col-sm-4 red"
+                                           style="text-align: left">**如果不输入密码则视为密码不更改</p>
+                                    </div>
+
+                                    {% if edit_success %}
+                                        <div class="form-group">
+                                            <label for="pid" class="col-sm-2 control-label no-padding-right"></label>
+
+                                            <p class="help-block col-sm-4 red"
+                                               style="text-align: left">{{ edit_success_message }}</p>
+                                        </div>
+
+
+                                    {% endif %}
+                                    {% if edit_error %}
+                                        <div class="form-group">
+                                            <label for="pid" class="col-sm-2 control-label no-padding-right"></label>
+
+                                            <p class="help-block col-sm-4 red"
+                                               style="text-align: left">{{ edit_error_message }}</p>
+                                        </div>
+                                    {% endif %}
+
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10" style="color: red">
+                                            <button type="submit"
+                                                    style="cursor:pointer; background-color: red;color: white"
+                                                    class="btn btn-default">
+                                                {#                                                    class="btn btn-danger btn-sm shiny">#}
+                                                <i class="fa "></i> 保存修改
+
+                                            </button>
+                                            <button type="submit" style="cursor:pointer" class="btn btn-default"
+                                                    onclick="history.back()">返回上一步
+                                            </button>
+                                            {#                                            <button><a style="cursor:pointer" onclick="history.back()">返回上一步</a></button>#}
+                                        </div>
+
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

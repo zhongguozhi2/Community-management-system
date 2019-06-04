@@ -1,0 +1,85 @@
+{% extends 'club_admin/admin_base.html' %}
+{% load static %}
+{% block content_right %}
+    <div class="page-content">
+        <div class="page-body">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'club_admin:index' %}">首页</a>
+                    </li>
+                    <li class="active">操作</li>
+                    <li class="active">编辑社团</li>
+                    <li class="active">编辑&nbsp;-&nbsp;<span style="color: red">{{ club.name }}</span></li>
+
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="widget">
+                        <div class="widget-header bordered-bottom bordered-blue">
+                            {#                            <span class="widget-caption">新增规则</span>#}
+                        </div>
+                        <div class="widget-body">
+                            <div id="horizontal-form">
+                                <form class="form-horizontal" role="form"
+                                      action="{% url 'club_admin:edit_club_page' club_id=club.id %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label no-padding-right">社团新名称</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" id="title"
+                                                   placeholder="请为社团-{{ club.name }}&nbsp;填写新名称"
+                                                   name="club_name" value="" type="text">
+                                        </div>
+                                        {#                                        <p class="help-block col-sm-4 red">* 请为社团-{{ club.name }}&nbsp;填写新名称&nbsp;&nbsp;不填名称则不更改</p>#}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pid" class="col-sm-2 control-label no-padding-right"></label>
+
+                                        <p class="help-block col-sm-4 red"
+                                           style="text-align: left">*
+                                            请为社团-{{ club.name }}&nbsp;填写新名称&nbsp;&nbsp;不填，则不更改</p>
+                                    </div>
+
+                                    {% if edit_club_success %}
+                                        <div class="form-group">
+                                            <label for="pid" class="col-sm-2 control-label no-padding-right"></label>
+
+                                            <p class="help-block col-sm-4 red"
+                                               style="text-align: left">{{ edit_club_success_message }}</p>
+                                        </div>
+
+
+                                    {% endif %}
+                                    {% if edit_club_error %}
+                                        <div class="form-group">
+                                            <label for="pid" class="col-sm-2 control-label no-padding-right"></label>
+
+                                            <p class="help-block col-sm-4 red"
+                                               style="text-align: left">{{ edit_club_error_message }}</p>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-default"
+                                                    style="background-color: red; color: white">更改名称
+                                            </button>
+                                            <button type="submit" style="cursor:pointer" class="btn btn-default"
+                                                    onclick="history.back()">返回上一步
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

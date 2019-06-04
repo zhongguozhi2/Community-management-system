@@ -1,0 +1,129 @@
+{% extends 'club/club_base.html' %}
+{% load static %}
+
+{% block content_right %}
+
+    <div class="page-content">
+
+
+        <!-- Page Body -->
+        <div class="page-body">
+            {#            <form action="{% url 'club:club' club_id=club.id %}" method="post">#}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group" style="padding-bottom: 10px">
+                    {#                <input type="submit" value="查询">#}
+                    <button type="submit" class="btn btn-default" value="查询">查询</button>
+                    <div class="col-sm-6" style="width: 30%">
+                        <input class="form-control"
+                                {#                               value="{{ manage_admin.sid }}" name="key_word" placeholder="请输入学号/姓名 开始模糊查询"#}
+                               value="{% if key %} {{ key }} {% else %}请输入学号/姓名 开始模糊查询{% endif %}" name="key_word"
+                               placeholder="请输入学号/姓名 开始模糊查询"
+                               type="text">
+                    </div>
+                </div>
+            </form>
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'club:index' %}">首页</a>
+                    </li>
+                    <li class="active">所有社团</li>
+                    <li class="active">{{ club.name }}</li>
+                    <li class="active" style="color: red">{% if club in user.club.all %}已经加入了该社团 {% else %}
+                        未加入该社团，如想加入请联系社团管理员{% endif %}</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="widget">
+                        <div class="widget-body">
+                            <div class="flip-scroll">
+                                <table class="table table-bordered table-hover" style="color: red">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="3">社团管理员列表</th>
+                                    </tr>
+                                    </thead>
+                                    <thead class="">
+                                    <tr>
+                                        <th class="text-center">学号</th>
+                                        <th class="text-center">管理员名称</th>
+                                        <th class="text-center" width="30%"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for admin in club_admin %}
+                                        <tr>
+                                            <td align="center">{{ admin.sid }}</td>
+                                            <td align="center">{{ admin.name }}</td>
+                                            <td align="center">
+                                                <a href="{% url 'club:see_all' join_club_id=club.id  member_id=admin.id %}"
+                                                   class="btn btn-primary btn-sm shiny">
+                                                    {#                                                                                                            <i class="fa fa-edit"></i> 查看#}
+                                                    <i class="fa fa-eye"></i> 查看
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+
+                        <div class="widget-body" style="margin-top: 40px">
+                            <div class="flip-scroll">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="3">社团成员列表</th>
+                                    </tr>
+                                    </thead>
+                                    <thead class="">
+                                    <tr>
+                                        <th class="text-center">学号</th>
+                                        <th class="text-center">社员名称</th>
+                                        <th class="text-center" width="30%"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for member in club_member %}
+                                        <tr>
+                                            <td align="center">{{ member.sid }}</td>
+                                            <td align="center">{{ member.name }}</td>
+                                            <td align="center">
+                                                <a href="{% url 'club:see_all' join_club_id=club.id  member_id=member.id %}"
+                                                   class="btn btn-primary btn-sm shiny">
+                                                    {#                                                                                                            <i class="fa fa-edit"></i> #}
+                                                    <i class="fa fa-eye"></i> 查看
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Page Body -->
+    </div>
+
+{% endblock %}
+

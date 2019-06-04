@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="login-container animated fadeInDown">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="loginbox bg-white">
+                <div class="loginbox-title">周师社团管理系统</div>
+                <div class="loginbox-title">管理员登录</div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="请输入用户名" name="username" type="text">
+                </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="请输入密码" name="password" type="password">
+                </div>
+                <div class="loginbox-submit">
+                    <input class="btn btn-primary btn-block" value="登陆" type="submit">
+
+                </div>
+            </div>
+            <div class="logobox">
+                {% if login_error %}
+                    <div class="form-group">
+
+                        <p class="text-center" style="color: red">{{ login_error_message }}</p>
+                    </div>
+                {% else %}
+                    <p class="text-center">请登录</p>
+                {% endif %}
+
+            </div>
+        </form>
+    </div>
+{% endblock %}
